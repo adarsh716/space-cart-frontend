@@ -156,10 +156,10 @@ export default function ProductDetail(){
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-xl line-through tracking-tight text-gray-900">
-                Rs{product.price}
+                Rs{" "}{product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-                Rs{product.discountPrice}
+                Rs{" "}{product.discountPrice}
               </p>
 
               {/* Reviews */}
@@ -185,8 +185,7 @@ export default function ProductDetail(){
               </div>
 
               <form className="mt-10">
-                {/* Colors */}
-                {product.colors && product.colors.length > 0 && (
+                {/* {product.colors && product.colors.length > 0 && (
                   <div>
                     <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
@@ -229,11 +228,11 @@ export default function ProductDetail(){
                   </div>
                 )}
 
-                
+                 */}
                 <button
                   onClick={handleCart}
                   type="submit"
-                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
                 >
                   Add to Cart
                 </button>
@@ -280,9 +279,9 @@ export default function ProductDetail(){
                   <p className="text-sm text-gray-600">{product.description}</p>
                 </div>
               </div>
-              <hr />
+              {/* <hr /> */}
               
-              <Form onSubmit={e=>e}>
+              {/* <Form onSubmit={e=>e}>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -302,7 +301,7 @@ export default function ProductDetail(){
                   Submit
                 </Button>{" "}
                 {productReviewed}
-              </Form>
+              </Form> */}
             </div>
           </div>
         </div>

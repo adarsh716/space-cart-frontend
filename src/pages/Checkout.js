@@ -148,7 +148,7 @@ function Checkout() {
                             required: 'name is required',
                           })}
                           id="name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.name && (
                           <p className="text-red-500">{errors.name.message}</p>
@@ -170,7 +170,7 @@ function Checkout() {
                             required: 'email is required',
                           })}
                           type="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.email && (
                           <p className="text-red-500">{errors.email.message}</p>
@@ -192,7 +192,7 @@ function Checkout() {
                             required: 'phone is required',
                           })}
                           type="tel"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.phone && (
                           <p className="text-red-500">{errors.phone.message}</p>
@@ -214,7 +214,7 @@ function Checkout() {
                             required: 'street is required',
                           })}
                           id="street"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.street && (
                           <p className="text-red-500">
@@ -239,7 +239,7 @@ function Checkout() {
                           })}
                           id="city"
                           autoComplete="address-level2"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.city && (
                           <p className="text-red-500">{errors.city.message}</p>
@@ -262,7 +262,7 @@ function Checkout() {
                           })}
                           id="state"
                           autoComplete="address-level1"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.state && (
                           <p className="text-red-500">{errors.state.message}</p>
@@ -284,7 +284,7 @@ function Checkout() {
                             required: 'pinCode is required',
                           })}
                           id="pinCode"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="w-full p-2 border border-gray-300 rounded-md"
                         />
                         {errors.pinCode && (
                           <p className="text-red-500">
@@ -298,7 +298,6 @@ function Checkout() {
 
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                   <button
-                    // onClick={e=>reset()}
                     type="button"
                     className="text-sm font-semibold leading-6 text-gray-900"
                   >

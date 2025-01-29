@@ -24,17 +24,12 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <div style={{ marginLeft: "330px", marginTop: "-50px" }} >
+      <div style={{ marginLeft: "330px", marginTop: "-50px",height:"100dvh" }} >
         <MDBContainer className="my-5 gradient-form">
 
           <MDBRow>
             <MDBCol col='6' className="text-center mb-5 ml-20 ml-20">
               <div className="text-center p-3 my-5 ml-20 ml-20 d-flex flex-column w-50">
-                <div className="text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                    style={{ width: '185px', marginLeft: '130px' }} alt="logo" />
-                  <h4 className="mt-1 mb-5 pb-1">We are The Space Cart Team</h4>
-                </div>
 
                 <p>Please enter your email</p>
                 <form
@@ -64,14 +59,14 @@ export default function ForgotPassword() {
                 )}
                   </div>
                     <div className="text-center pt-1 mb-5 pb-1">
-                      <MDBBtn type="submit" className=" w-100 gradient-custom-2" style={{background:"linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"}}>SEND EMAIL</MDBBtn>
+                      <MDBBtn type="submit" className=" w-100 gradient-custom-2" style={{color:"white",backgroundColor:"black"}}>SEND EMAIL</MDBBtn>
                     </div>
                 </form>
 
                 <div className="d-flex flex-row align-items-center justify-content-center pb-4 -mb-10">
                   <p className="mb-0">Send back to{" "}</p>
                   <Link to="/login">
-                    <MDBBtn outline className='mx-2' color='danger' style={{color:"linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)"}}>
+                    <MDBBtn outline className='mx-2' color='danger' style={{color:"white",backgroundColor:"black"}}>
                       LOGIN
                     </MDBBtn>
                   </Link>
@@ -87,5 +82,3 @@ export default function ForgotPassword() {
     </>
   );
 }
-
-
