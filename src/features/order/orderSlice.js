@@ -1,36 +1,100 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createOrder, fetchAllOrders,updateOrder } from './orderAPI';
+import { capturePayment, createOrder, fetchAllOrders, updateOrder } from './orderAPI';
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   orders: [],
   status: 'idle',
   currentOrder: null,
-  totalOrders: 0
+  totalOrders: 0,
 };
 
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
 
 export const createOrderAsync = createAsyncThunk(
   'order/createOrder',
+
   async (order) => {
-    const response = await createOrder(order);
+
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+    if (!res) {
+      alert('Razorpay failed to load!!');
+      return;
+    }
+
+    let response;
+    try {
+      response = await createOrder(order);
+      console.log('Order created successfully', response);
+    } catch (error) {
+      console.error('Error creating order:', error);
+      return;
+    }
+
+    console.log("wefwf",response?.data?.id);
+    const id=response?.data?.id;
+
+    const options = {
+      key: 'rzp_test_oSItdzvqy6kWyb', 
+      amount: order.totalAmount * 100, 
+      currency: 'INR',
+      name: 'Space cart',
+      description: 'Thank you for purchasing the product',
+      handler: async(paymentResponse) =>{
+        const response=await capturePayment(order,id);
+        if(response?.data?.success){
+          // navigate("/my-orders");
+          alert("hello");
+        }
+      },
+    };
+
+    console.log(options);
+
+    try {
+      if (window.Razorpay) {
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+
+        paymentObject.on('payment.failed', function (failureResponse) {
+          console.error('Payment failed:', failureResponse.error);
+        });
+      } else {
+        console.error('Razorpay is not available.');
+      }
+    } catch (err) {
+      console.error('Error opening Razorpay:', err);
+    }
 
     return response.data;
   }
 );
+
 export const updateOrderAsync = createAsyncThunk(
   'order/updateOrder',
   async (order) => {
     const response = await updateOrder(order);
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
 
 export const fetchAllOrdersAsync = createAsyncThunk(
   'order/fetchAllOrders',
-  async ({sort, pagination}) => {
-    const response = await fetchAllOrders(sort,pagination);
-    // The value we return becomes the `fulfilled` action payload
+  async ({ sort, pagination }) => {
+    const response = await fetchAllOrders(sort, pagination);
     return response.data;
   }
 );
@@ -66,9 +130,9 @@ export const orderSlice = createSlice({
       })
       .addCase(updateOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        const index =  state.orders.findIndex(order=>order.id===action.payload.id)
+        const index = state.orders.findIndex((order) => order.id === action.payload.id);
         state.orders[index] = action.payload;
-      })
+      });
   },
 });
 

@@ -34,6 +34,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import StripeCheckout from './pages/StripeCheckout';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import OrderDash from './features/dashboard/Order';
+import { fetchBrandsAsync,fetchCategoriesAsync } from './features/product/productSlice';
 
 const options = {
   timeout: 5000,
@@ -195,6 +196,11 @@ function App() {
       dispatch(fetchLoggedInUserAsync());
     }
   }, [dispatch, user]);
+
+    useEffect(() => {
+      dispatch(fetchBrandsAsync());
+      dispatch(fetchCategoriesAsync());
+    }, []);
 
   return (
     <>

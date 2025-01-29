@@ -30,5 +30,27 @@ export function fetchUserCount() {
       resolve({ data });
     });
   }
+
+  export async function deleteProduct(id) {
+    try {
+      const response = await fetch(`/products/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      console.log(response);
+      
+      const data = await response.json();
+      return { data };
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      return { error: error.message };
+    }
+  }
+  
+
+
   
   

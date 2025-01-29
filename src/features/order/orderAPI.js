@@ -10,6 +10,20 @@ export function createOrder(order) {
   });
 }
 
+export function capturePayment(order, id) {
+  return new Promise(async (resolve) => {
+    const response = await fetch('/orders/capturepayment', {
+      method: 'POST',
+      body: JSON.stringify({ order, id }), 
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+
 export function updateOrder(order) {
   return new Promise(async (resolve) => {
     const response = await fetch('/orders/'+order.id, {
