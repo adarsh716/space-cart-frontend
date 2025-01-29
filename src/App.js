@@ -16,6 +16,7 @@ import {
   selectUserChecked,
 } from './features/auth/authSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
+import DashboardPage from './features/dashboard';
 import PageNotFound from './pages/404';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserOrdersPage from './pages/UserOrdersPage';
@@ -32,6 +33,7 @@ import { positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import StripeCheckout from './pages/StripeCheckout';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import OrderDash from './features/dashboard/Order';
 
 const options = {
   timeout: 5000,
@@ -164,6 +166,14 @@ const router = createBrowserRouter([
     element: <ResetPasswordPage></ResetPasswordPage>,
   },
   {
+    path: '/admin-dashboard',
+    element: <DashboardPage></DashboardPage>,
+  },
+  {
+    path: '/order-dashboard',
+    element: <OrderDash></OrderDash>,
+  },
+  {
     path: '*',
     element: <PageNotFound></PageNotFound>,
   },
@@ -194,7 +204,6 @@ function App() {
             <RouterProvider router={router} />
           </Provider>
         )}
-        {/* Link must be inside the Provider */}
       </div>
     </>
   );
