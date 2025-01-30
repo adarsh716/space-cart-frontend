@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import {
   fetchUserCount,
@@ -10,6 +10,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectCategories } from "../product/productSlice";
 import { fetchCategories } from "../product/productAPI";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Link, useNavigate } from "react-router-dom";
+import { selectUserInfo } from "../user/userSlice";
+
+
+const userNavigation = [{ name: "Sign out", link: "/logout" }];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const Dashboard = () => {
   const [userCount, setUserCount] = useState(null);
@@ -19,7 +29,11 @@ const Dashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const categories = useSelector(selectCategories);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
 
+  // if(userInfo?.role !== "admin"){
+  //   navigate("/");
+  // }
 
   useEffect(() => {
     const getCount = async () => {
@@ -28,10 +42,9 @@ const Dashboard = () => {
         const orderResponse = await fetchOrderCount();
         const productResponse = await fetchProductCount();
         const allProduct = await fetchAllProductst();
-        
 
         setProducts(allProduct.data.products);
-        setFilteredProducts(allProduct.data.products); 
+        setFilteredProducts(allProduct.data.products);
         setUserCount(userResponse.data.userCount);
         setOrderCount(orderResponse.data.userOrders);
         setProductCount(productResponse.data.productCount);
@@ -51,7 +64,6 @@ const Dashboard = () => {
       setFilteredProducts(products);
     }
   }, [selectedCategory, products]);
-
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?"))
@@ -93,7 +105,14 @@ const Dashboard = () => {
       <main className="flex-1 p-6 bg-gray-100">
         <header className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+          <Link
+            to="/logout"
+            className={classNames(
+              "block px-4 py-2 text-sm text-gray-700"
+            )}
+          >
+            Logout
+          </Link>
         </header>
 
         <section className="grid grid-cols-4 gap-4 mt-6">

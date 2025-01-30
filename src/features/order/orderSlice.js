@@ -26,7 +26,7 @@ function loadScript(src) {
 export const createOrderAsync = createAsyncThunk(
   'order/createOrder',
 
-  async (order) => {
+  async (order,navigate) => {
 
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
@@ -56,8 +56,7 @@ export const createOrderAsync = createAsyncThunk(
       handler: async(paymentResponse) =>{
         const response=await capturePayment(order,id);
         if(response?.data?.success){
-          // navigate("/my-orders");
-          alert("hello");
+          navigate("/my-orders");
         }
       },
     };

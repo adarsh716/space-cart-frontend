@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   deleteItemFromCartAsync,
@@ -60,6 +60,7 @@ function Checkout() {
     console.log(e.target.value);
     setPaymentMethod(e.target.value);
   };
+  const navigate=useNavigate();
 
   const handleOrder = (e) => {
     if (selectedAddress && paymentMethod) {
@@ -75,7 +76,7 @@ function Checkout() {
         expirationDate,
         cvc
       };
-      dispatch(createOrderAsync(order));
+      dispatch(createOrderAsync(order,navigate));
     } else {
       alert('Enter Address and Payment method');
     }

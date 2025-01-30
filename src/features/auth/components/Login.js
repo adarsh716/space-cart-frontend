@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { selectError, selectLoggedInUser } from "../authSlice";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginUserAsync } from "../authSlice";
 import { useForm } from "react-hook-form";
 import {
@@ -12,6 +13,7 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import { selectUserInfo } from "../../user/userSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -24,16 +26,29 @@ export default function Login() {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  // Toggle password visibility
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    if (user?.role !== "admin") {
+      navigate("/");
+    } else {
+      navigate("/admin-dashboard");
+    }
+  }, [user]);
 
   return (
     <>
-      {user && <Navigate to="/" replace={true} />}
-      <div style={{ margin: "0 auto", maxWidth: "1200px", paddingTop: "50px",height:"100dvh" }}>
+      <div
+        style={{
+          margin: "0 auto",
+          maxWidth: "1200px",
+          paddingTop: "50px",
+          height: "100dvh",
+        }}
+      >
         <MDBContainer
           className="my-5 gradient-form"
           style={{ backgroundColor: "white", color: "#000" }}
@@ -51,7 +66,6 @@ export default function Login() {
               />
             </MDBCol>
 
-            {/* Right Column: Form */}
             <MDBCol col="6" className="p-5">
               <div className="text-center mb-5">
                 <h4 className="mt-1 mb-5 pb-1">We are The Space Cart Team</h4>
@@ -95,7 +109,10 @@ export default function Login() {
                     className="text-sm"
                     style={{ marginLeft: "auto", color: "#000" }}
                   >
-                    <Link to="/forgot-password" className="font-semibold text-black">
+                    <Link
+                      to="/forgot-password"
+                      className="font-semibold text-black"
+                    >
                       Forgot password?
                     </Link>
                   </div>

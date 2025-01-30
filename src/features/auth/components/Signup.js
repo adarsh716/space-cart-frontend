@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { selectLoggedInUser, createUserAsync } from '../authSlice';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {
   MDBBtn,
   MDBContainer,
@@ -10,13 +10,13 @@ import {
   MDBInput,
   MDBIcon
 } from 'mdb-react-ui-kit';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 
 export default function Signup() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate=useNavigate();
 
   const {
     register,
@@ -24,9 +24,19 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
+    useEffect(() => {
+      if (!user) {
+        return;
+      }
+      if (user?.role !== "admin") {
+        navigate("/");
+      } else {
+        navigate("/admin-dashboard");
+      }
+    }, [user]);
+
   return (
     <>
-      {user && <Navigate to="/" replace={true} />}
       <div style={{ margin: "0 auto", maxWidth: "1200px", paddingTop: "50px",height:"100dvh" }}>
         <MDBContainer className="my-5 gradient-form">
           <MDBRow>

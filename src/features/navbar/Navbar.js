@@ -17,7 +17,7 @@ const navigation = [
   { name: 'Orders', link: '/admin/orders', admin: true },
 
 ];
-const userNavigation = [
+const userNavigation = [ 
   { name: 'My Profile', link: '/profile' },
   { name: 'My Orders', link: '/my-orders' },
   { name: 'Sign out', link: '/logout' },
